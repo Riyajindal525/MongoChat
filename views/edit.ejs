@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Chat</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <h1>Edit your Chat : <%= chat.from %></h1>
+  <h3>Your Id is : <%= chat._id %></h3>
+  <h3>Basically! This Chat belongs to <b><%= chat.from %></b> and was received by <b><%= chat.to %></b>.</h3>
+
+   <% if(chat.edited) { %>
+    <p style="color: orange; font-weight: bold;">This message was edited before. You can change it again and save.✅</p>
+  <% } %>
+
+  <h4>Edit your message 😊👇</h4>
+
+  
+  <form method="POST" action="/user/<%= chat._id %>?_method=PUT">
+    <textarea 
+      name="message" 
+      cols="30" 
+      rows="10"><%= chat.message %></textarea>
+    <br><br>
+    <button 
+      style="background-color: green; 
+             color: white; 
+             padding: 8px 16px; 
+             border: none; 
+             border-radius: 5px; 
+             font-weight: bold; 
+             cursor: pointer;">
+      Save Changes
+    </button>
+  </form>
+</body>
+</html>

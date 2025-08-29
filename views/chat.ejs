@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MongoChat</title>
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    .chats-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .chats-header h1 {
+      margin: 0;
+      align-items: center;
+    }
+
+    .chats-header .btn {
+      background-color: #28a745;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .chats-header .btn:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+  <div class="chats-header">
+    <h1>All Chats</h1>
+    <form method="GET" action="/chats/new">
+      <button class="btn">Add a new chat</button>
+    </form>
+  </div>
+
+  <div class="chat-container">
+    <% for(let chat of Chats){ %>
+      <div class="chat-card">
+        <p class="chat-from">👤 From : <%= chat.from %></p>
+        <p class="chat-message"><%= chat.message %></p>
+
+        <!-- Edit button on a new line -->
+        <form method="GET" action="/user/<%= chat._id %>/edit" style="margin-top: 5px;">
+          <button style="background-color: goldenrod; color: white; padding: 8px 16px; border: none; border-radius: 5px; cursor:pointer;">
+            Edit your message!
+          </button>
+        </form>
+
+        <p class="chat-to">👤 Received by <i><%= chat.to %></i></p>
+        <p class="chat-time">⏰ Created at :
+          <%= new Date(chat.created_at).toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" }) %>
+        </p>
+
+        <!-- Delete button -->
+        <form method="POST" action="/user/<%= chat._id %>?_method=DELETE" style="margin-top:5px;">
+          <button style="background-color: rgb(238, 83, 83); color: white; padding: 8px 16px; border: none; border-radius: 5px; cursor:pointer;">
+            Delete Your Chat
+          </button>
+        </form>
+      </div>
+    <% } %>
+  </div>
+</body>
+</html>
