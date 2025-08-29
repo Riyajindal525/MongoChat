@@ -33,7 +33,7 @@ It’s designed to showcase a simple yet functional chat system with the power o
 
 3.**Run the server**:
 
-   node app.js
+   node index.js
 
 
 4.**Open your browser at:**
